@@ -5,21 +5,19 @@ TRACKPAD_DEVICE_ID=$(cat ~/.config/magic-trackpad-switcher/TRACKPAD_DEVICE_ID)
 while :
 do
   IS_POWER_ON=$(blueutil --power | grep 1)
-  if [ "$IS_POWER_ON" ]; then
-    # Pair the trackpad if it is not paired.
-    IS_TRACKPAD_PAIRED=$(blueutil --paired | grep $TRACKPAD_DEVICE_ID)
-    if [ ! "$IS_TRACKPAD_PAIRED" ]; then
-      echo "Pairing the trackpad..."
-      blueutil --pair $TRACKPAD_DEVICE_ID
-      echo "Connecting the trackpad..."
-      blueutil --wait-connect $TRACKPAD_DEVICE_ID
-    fi
-
+  IS_TRACKPAD_PAIRED=$(blueutil --paired | grep $TRACKPAD_DEVICE_ID)
+  if [ "$IS_POWER_ON" ] && [ "$IS_TRACKPAD_PAIRED" ]; then
     # Wait for trackpad to be disconnected.
     echo "Waiting for trackpad to be disconnected..."
     blueutil --wait-disconnect $TRACKPAD_DEVICE_ID
     echo "Unpairing the trackpad..."
     blueutil --unpair $TRACKPAD_DEVICE_ID
+  elif [ "$IS_POWER_ON" ] && [ ! "$IS_TRACKPAD_PAIRED" ]; then
+    # Pair the trackpad if it is not paired.
+    echo "Pairing the trackpad..."
+    blueutil --pair $TRACKPAD_DEVICE_ID
+    echo "Connecting the trackpad..."
+    blueutil --wait-connect $TRACKPAD_DEVICE_ID
   else
     #  When the bluetooth module is off, just wait. While waiting, the system sleeps.
     echo "Waiting for bluetooth module to be turned on..."
