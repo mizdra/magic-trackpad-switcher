@@ -6,6 +6,7 @@ The tool to switch Magic Trackpad connections between multiple Mac devices
 
 ```bash
 brew install mizdra/tap/magic-trackpad-switcher
+echo 'export TRACKPAD_DEVICE_ID="xx-xx-xx-xx-xx-xx"' >> .bashrc
 brew services start magic-trackpad-switcher
 ```
 
