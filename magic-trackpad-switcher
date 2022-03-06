@@ -9,15 +9,20 @@ do
     # Pair the trackpad if it is not paired.
     IS_TRACKPAD_PAIRED=$(blueutil --paired | grep $TRACKPAD_DEVICE_ID)
     if [ ! "$IS_TRACKPAD_PAIRED" ]; then
+      echo "Pairing the trackpad..."
       blueutil --pair $TRACKPAD_DEVICE_ID
+      echo "Connecting the trackpad..."
       blueutil --wait-connect $TRACKPAD_DEVICE_ID
     fi
 
     # Wait for trackpad to be disconnected.
+    echo "Waiting for trackpad to be disconnected..."
     blueutil --wait-disconnect $TRACKPAD_DEVICE_ID
+    echo "Unpairing the trackpad..."
     blueutil --unpair $TRACKPAD_DEVICE_ID
   else
     #  When the bluetooth module is off, just wait. While waiting, the system sleeps.
+    echo "Waiting for bluetooth module to be turned on..."
     sleep 5
   fi
 done
