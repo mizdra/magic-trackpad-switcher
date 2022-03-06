@@ -1,12 +1,14 @@
 #!/usr/bin/env bash
 
+TRACKPAD_DEVICE_ID=$(cat ~/.config/magic-trackpad-switcher/TRACKPAD_DEVICE_ID)
+
 IS_POWER_ON=$(blueutil --power | grep 1)
 IS_TRACKPAD_CONNECTED=$(blueutil --is-connected "$TRACKPAD_DEVICE_ID" | grep 1)
 IS_TRACKPAD_PAIRED=$(blueutil --paired | grep "$TRACKPAD_DEVICE_ID")
 
 if [ "$IS_POWER_ON" ]; then
   if [ "$IS_TRACKPAD_PAIRED" ]; then
-    # noop
+    : # noop
   else
     blueutil --pair "$TRACKPAD_DEVICE_ID"
   fi
@@ -14,6 +16,6 @@ else
   if [ "$IS_TRACKPAD_PAIRED" ]; then
     blueutil --unpair "$TRACKPAD_DEVICE_ID"
   else
-    # noop
+    : # noop
   fi
 fi
