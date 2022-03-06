@@ -11,7 +11,11 @@ do
     echo "Waiting for trackpad to be disconnected..."
     blueutil --wait-disconnect $TRACKPAD_DEVICE_ID
     echo "Unpairing the trackpad..."
+    blueutil --power 1
+    blueutil --connect $TRACKPAD_DEVICE_ID
+    blueutil --wait-connect $TRACKPAD_DEVICE_ID
     blueutil --unpair $TRACKPAD_DEVICE_ID
+    blueutil --power 0
   elif [ "$IS_POWER_ON" ] && [ ! "$IS_TRACKPAD_PAIRED" ]; then
     # Pair the trackpad if it is not paired.
     echo "Pairing the trackpad..."
