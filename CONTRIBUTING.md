@@ -1,8 +1,9 @@
 ## How to release
 
 ```bash
-git tag -a vX.X.X -m "vX.X.X"
+export NEW_VERSION=vX.X.X
+git tag -a $NEW_VERSION -m $NEW_VERSION
 git push --follow-tags
-gh release create vX.X.X --notes "vX.X.X"
+gh release create $NEW_VERSION
 # Open https://github.com/mizdra/homebrew-tap , and edit formula.
 ```
