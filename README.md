@@ -2,6 +2,16 @@
 
 The tool to switch Magic Trackpad connections between multiple Mac devices
 
+## Features
+
+- When clamshell mode is enabled...
+  1. Unpair Magic Trackpad
+  1. Power off the bluetooth module
+  1. Sleep system
+- When the system wakes up from sleep...
+  1. Power on the bluetooth module
+  1. Pair Magic Trackpad
+
 ## Install
 
 Install `magic-trackpad-switcher`.
