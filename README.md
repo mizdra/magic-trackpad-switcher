@@ -24,13 +24,20 @@ echo "xx-xx-xx-xx-xx-xx" > ~/.config/magic-trackpad-switcher/TRACKPAD_DEVICE_ID
 Finally, start `magic-trackpad-switcher` service.
 
 ```bash
-brew services start magic-trackpad-switcher
+brew services start mizdra/tap/magic-trackpad-switcher
 ```
 
 ## Uninstall
 
 ```bash
-brew services stop magic-trackpad-switcher
+brew services stop mizdra/tap/magic-trackpad-switcher
 brew uninstall mizdra/tap/magic-trackpad-switcher
 rm -rf ~/.config/magic-trackpad-switcher
+```
+
+## Update
+
+```bash
+brew upgrade
+brew services restart mizdra/tap/magic-trackpad-switcher
 ```

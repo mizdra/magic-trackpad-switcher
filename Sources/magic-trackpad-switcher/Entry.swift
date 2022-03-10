@@ -5,19 +5,20 @@ struct Entry {
     static func main() async throws {
         let trackpadDeviceId = getTrackpadDeviceId()
 
+        let isPowerOn = try isPowerOn()
         let isPaired = try isPaired(id: trackpadDeviceId)
         let isConnected = try isConnected(id: trackpadDeviceId)
 
-        if isBuiltInDisplayActive() {
+        if isBuiltInDisplayActive() && !isPowerOn {
+            print("Waking up...")
             try setBluetooth(powerOn: true)
-            if isConnected {
-                // noop
-            } else if isPaired {
+            if isConnected && !isConnected {
                 try connect(id: trackpadDeviceId)
-            } else {
+            } else if !isPaired {
                 try pair(id: trackpadDeviceId)
             }
-        } else {
+        } else if !isBuiltInDisplayActive() && isPowerOn {
+            print("Sleeping...")
             if isPaired {
                 if !isConnected {
                     try connect(id: trackpadDeviceId)
