@@ -1,0 +1,19 @@
+name: Release
+
+on: [push]
+
+jobs:
+  release:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: fwal/setup-swift@1
+        with:
+          swift-version: '5'
+      - name: Build
+        run: xcrun swift build -c release --arch arm64 --arch x86_64
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: .build/apple/Products/Release/magic-trackpad-switcher

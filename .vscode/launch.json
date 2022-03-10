@@ -1,0 +1,33 @@
+{
+  "configurations": [
+    {
+      "type": "lldb",
+      "request": "launch",
+      "name": "Debug magic-trackpad-switcher",
+      "program": "${workspaceFolder:magic-trackpad-switcher}/.build/debug/magic-trackpad-switcher",
+      "args": [],
+      "cwd": "${workspaceFolder:magic-trackpad-switcher}",
+      "preLaunchTask": "swift: Build Debug magic-trackpad-switcher"
+    },
+    {
+      "type": "lldb",
+      "request": "launch",
+      "name": "Release magic-trackpad-switcher",
+      "program": "${workspaceFolder:magic-trackpad-switcher}/.build/release/magic-trackpad-switcher",
+      "args": [],
+      "cwd": "${workspaceFolder:magic-trackpad-switcher}",
+      "preLaunchTask": "swift: Build Release magic-trackpad-switcher"
+    },
+    {
+      "type": "lldb",
+      "request": "launch",
+      "name": "Test magic-trackpad-switcher",
+      "program": "/Applications/Xcode.app/Contents/Developer/usr/bin/xctest",
+      "args": [
+        ".build/debug/magic-trackpad-switcherPackageTests.xctest"
+      ],
+      "cwd": "${workspaceFolder:magic-trackpad-switcher}",
+      "preLaunchTask": "swift: Build All"
+    }
+  ]
+}
