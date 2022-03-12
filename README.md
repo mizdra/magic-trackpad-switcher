@@ -51,3 +51,19 @@ rm -rf ~/.config/magic-trackpad-switcher
 brew upgrade
 brew services restart mizdra/tap/magic-trackpad-switcher
 ```
+
+## Debug
+
+### Run script from source code
+
+```bash
+git clone git@github.com:mizdra/magic-trackpad-switcher.git
+swift run
+```
+
+### Logging
+
+```bash
+tail -F $(brew --prefix)/var/log/magic-trackpad-switcher.log
+tail -F $(brew --prefix)/var/log/magic-trackpad-switcher.error.log
+```
