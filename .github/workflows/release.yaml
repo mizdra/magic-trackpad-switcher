@@ -24,3 +24,4 @@ jobs:
           token: ${{ secrets.PAT }}
           tap: mizdra/tap
           formula: magic-trackpad-switcher
+          livecheck: true
