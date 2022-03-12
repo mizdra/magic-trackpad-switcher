@@ -6,21 +6,20 @@ struct Entry {
         let trackpadDeviceId = getTrackpadDeviceId()
 
         let isPowerOn = try isPowerOn()
-        let isPaired = try isPaired(id: trackpadDeviceId)
-        let isConnected = try isConnected(id: trackpadDeviceId)
 
         if isBuiltInDisplayActive() && !isPowerOn {
             print("Waking up...")
             try setBluetooth(powerOn: true)
-            if isConnected && !isConnected {
-                try connect(id: trackpadDeviceId)
-            } else if !isPaired {
+            if !(try isPaired(id: trackpadDeviceId)) {
                 try pair(id: trackpadDeviceId)
+            }
+            if !(try isConnected(id: trackpadDeviceId)) {
+                try connect(id: trackpadDeviceId)
             }
         } else if !isBuiltInDisplayActive() && isPowerOn {
             print("Sleeping...")
-            if isPaired {
-                if !isConnected {
+            if try isPaired(id: trackpadDeviceId) {
+                if !(try isConnected(id: trackpadDeviceId)) {
                     try connect(id: trackpadDeviceId)
                 }
                 try unpair(id: trackpadDeviceId)
